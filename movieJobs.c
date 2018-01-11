@@ -2,22 +2,33 @@
 #include <string.h>
 #include <stdlib.h>
 #include <time.h>
+#include "movieJobs.h"
 
+SET powerSets(SET *S, int n) {
+    int o = orderOf(S);
+    SET T[2^n];
+    for(int i = 0; i < o; i++) {
+        SET *V;
+        createSet(V);
+        for(    	
+    } 
+}
 
 
 int main(void) {
-
+    int n; 
     scanf("%d", &n);
     //create an array of potential jobs
-    set jobs[n];
+    SET *I;
+    createSet(I);
     int s, e;
     for(int i = 0; i < n; i++) {
         scanf("%d %d", &s, &e);
-        jobs[i].start = s;
-        jobs[i].end = e;
+	addElement(s, e, I);        
     }
-
-    set jobsMax[n];
-    //create a subset 
+    printf("Finished adding jobs\n");
+    //create subsets
     
+
+    return 0;
 }

@@ -1,38 +1,30 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-
-typedef struct SET_ELEMENT {
-    int start;
-    int end;
-    struct SET_ELEMENT *next;
-} SET_ELEMENT;
-
-typedef struct SET {
-    SET_ELEMENT *root;        
-} SET;
-
-void createSet(SET *S){
-    SET_ELEMENT *e = malloc(sizeof(SET_ELEMENT));
-    e->next = null;
-    S->root = e;
-}
+#include "movieJobs.h"
 
 void addElement(int s, int e, SET *S) {
     SET_ELEMENT *temp = malloc(sizeof(SET_ELEMENT));
     temp->start = s;
     temp->end = e;
     temp->next = NULL;
-    SET_ELEMENT *search = S->root;
-    while(search->next != NULL) 
-        search = search->next;
-    search->next = temp;
+    if(S->root == NULL)
+        S->root = temp;
+    else {
+        SET_ELEMENT *search = S->root;
+        while(search->next != NULL) 
+            search = search->next;
+        search->next = temp;
+    }
 }
 
-int orderOfSet(SET *S) {
-    int order;
+int orderOf(SET *S) {
+    int order = 1;
+   
+    if(S->root == NULL) 
+        return 0;
+    
     SET_ELEMENT *search = S->root;
-    if(S->root == NULL) return 0;
     while(search->next != NULL) {
         order++;
         search = search->next;
@@ -40,5 +32,30 @@ int orderOfSet(SET *S) {
     return order;
 }
 
+SET Union(SET *X, SET *Y) {
+    SET T;
+    createSet(&T);
+    SET_ELEMENT *current;
+    if(X->root != NULL) {
+        current = X->root;
+	addElement(current->start, current->end, &T);
+        while(current->next != NULL) {
+	    current = current->next;
+            addElement(current->start, current->end, &T);
+        }
+    }
+	
+    if(Y->root != NULL) {
+        current = Y->root;
+        addElement(current->start, current->end, &T);
+        while(current->next != NULL) {
+            current = current->next;
+            addElement(current->start, current->end, &T);
+        }
+
+    }
+
+    return T;
+}
 
 
