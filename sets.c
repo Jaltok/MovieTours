@@ -34,11 +34,12 @@ int orderOf(SET *S) {
 
 SET Union(SET *X, SET *Y) {
     SET T;
-    createSet(&T);
+    //createSet(&T);
     SET_ELEMENT *current;
     if(X->root != NULL) {
         current = X->root;
-	addElement(current->start, current->end, &T);
+	    addElement(current->start, current->end, &T);
+        
         while(current->next != NULL) {
 	    current = current->next;
             addElement(current->start, current->end, &T);
